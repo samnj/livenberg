@@ -1,7 +1,13 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
+	reactStrictMode: true,
+	swcMinify: true,
+	images: {
+		domains: ['www.gutenberg.org'],
+	},
+	experimental: {
+		images: { allowFutureImage: true },
+	},
 }
 
 module.exports = nextConfig
