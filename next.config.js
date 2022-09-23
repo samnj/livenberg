@@ -5,9 +5,6 @@ const nextConfig = {
 	images: {
 		domains: ['www.gutenberg.org'],
 	},
-	experimental: {
-		images: { allowFutureImage: true },
-	},
 }
 
 module.exports = nextConfig

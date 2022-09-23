@@ -1,5 +1,6 @@
-import { Fragment } from 'react'
 import Image from 'next/future/image'
+import { Fragment } from 'react'
+import { useAddBook } from '../utils/query'
 
 const BookList = ({ data }) => {
 	return data ? (
@@ -18,7 +19,15 @@ const BookList = ({ data }) => {
 }
 
 const Book = ({ book }) => {
-	const { authors, translators, title, mediaType, languages, coverUrl } = book
+	const { id, authors, translators, title, mediaType, languages, coverUrl } =
+		book
+
+	const mutation = useAddBook()
+
+	const handleAdd = (e) => {
+		e.preventDefault()
+		mutation.mutate({ id })
+	}
 
 	return (
 		<div className='mx-auto flex w-full flex-col rounded-md bg-zinc-50 py-4 px-2 text-xs drop-shadow-sm'>
@@ -42,6 +51,7 @@ const Book = ({ book }) => {
 			{/* <div>{translators}</div> */}
 			<div>{languages}</div>
 			<div>{mediaType}</div>
+			<button onClick={(e) => handleAdd(e)}>+</button>
 		</div>
 	)
 }

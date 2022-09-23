@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useIsFetching } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import { useGetBooks } from '../utils/query'
+import { useFetchBooks } from '../utils/query'
 import toast from 'react-hot-toast'
 
 const SearchBar = () => {
@@ -11,10 +11,15 @@ const SearchBar = () => {
 	const router = useRouter()
 	const timeoutRef = useRef(null)
 
-	const { data, isError, error } = useGetBooks(query)
+	const { data, isError, error } = useFetchBooks(query)
 
 	useEffect(() => {
-		if (data) router.push(query.query)
+		if (data) {
+			router.push({
+				pathname: '/results/books',
+				query: { search: query.query },
+			})
+		}
 	}, [data])
 
 	useEffect(() => {
@@ -36,15 +41,12 @@ const SearchBar = () => {
 			return
 		}
 
-		const formatedSearchString = searchStr
-			.trim()
-			.split(/ +/g)
-			.sort()
-			.join('%20')
-		const q = `/books?search=${formatedSearchString}`
-		setQuery({ query: q, isEnabled: true })
+		const formatSearch = (str) => {
+			return str.trim().split(/ +/g).sort().join('+')
+		}
+
+		setQuery({ query: formatSearch(searchStr), isEnabled: true })
 		setSearchStr('')
-		// router.push(q)
 	}
 
 	const handleChange = (e) => {
@@ -84,7 +86,7 @@ const SearchBar = () => {
 							${isValid ? 'stroke-emerald-500' : 'stroke-red-600'}
 						`}
 					>
-						{useIsFetching() ? (
+						{useIsFetching(['books']) ? (
 							<svg
 								className='mx-auto h-5 w-5 animate-spin text-emerald-400'
 								xmlns='http://www.w3.org/2000/svg'
