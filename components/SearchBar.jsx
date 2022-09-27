@@ -11,7 +11,7 @@ const SearchBar = () => {
 	const router = useRouter()
 	const timeoutRef = useRef(null)
 
-	const { data, isError, error } = useFetchBooks(query)
+	const { data, error, remove } = useFetchBooks(query)
 
 	useEffect(() => {
 		if (data) {
@@ -23,8 +23,11 @@ const SearchBar = () => {
 	}, [data])
 
 	useEffect(() => {
-		if (error) toast.error(error.message)
-	}, [isError, error])
+		if (error) {
+			toast.error(error.message)
+			error.message === 'no results found' && remove()
+		}
+	}, [error, remove])
 
 	const handleSubmit = (e) => {
 		e.preventDefault()

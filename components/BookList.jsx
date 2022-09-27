@@ -1,10 +1,12 @@
 import Image from 'next/future/image'
 import { Fragment } from 'react'
-import { useAddBook } from '../utils/query'
+import { BOOK_URL } from '../constants/constants'
+import AddBookBtn from './AddBookBtn'
+import LanguageTags from './LanguageTags'
 
 const BookList = ({ data }) => {
-	return data ? (
-		<div className='my-10 flex w-2/3 grow flex-col items-center justify-center gap-x-2 gap-y-4'>
+	return (
+		<div className='my-10 flex w-full grow flex-col items-center justify-center gap-x-2 gap-y-4 px-4'>
 			{data.pages.map((page) => (
 				<Fragment key={page.next}>
 					{page.books.map((book) => (
@@ -13,45 +15,65 @@ const BookList = ({ data }) => {
 				</Fragment>
 			))}
 		</div>
-	) : (
-		<div>no hay data</div>
 	)
 }
 
 const Book = ({ book }) => {
-	const { id, authors, translators, title, mediaType, languages, coverUrl } =
-		book
-
-	const mutation = useAddBook()
-
-	const handleAdd = (e) => {
-		e.preventDefault()
-		mutation.mutate({ id })
-	}
+	const { id, authors, translators, title, mediaType, languages, cover } = book
 
 	return (
-		<div className='mx-auto flex w-full flex-col rounded-md bg-zinc-50 py-4 px-2 text-xs drop-shadow-sm'>
-			<div className='mb-4 flex justify-center'>
+		<div className='relative mx-auto flex h-28 w-full justify-between rounded-md bg-zinc-50 text-xs drop-shadow-sm'>
+			<div className='flex w-20 shrink-0'>
 				<Image
-					src={coverUrl}
+					src={cover}
 					width={200}
 					height={200}
 					alt=''
-					className='w-40 rounded-sm drop-shadow-md'
+					className='rounded-sm drop-shadow-md'
 				/>
 			</div>
-			<div className={'pt-1 text-base font-bold'}>{title}</div>
-			<div className={' text-sm italic underline underline-offset-1'}>
-				{authors.map((author) => (
-					<span key={author} className={'block'}>
-						{author}
-					</span>
-				))}
+
+			<div className='flex grow flex-col justify-between p-2'>
+				<div>
+					<div className={'mb-1 text-sm font-bold'}>{title}</div>
+					{authors.map((author) => (
+						<div
+							key={author}
+							className={'text-sm italic underline underline-offset-1'}
+						>
+							{author}
+						</div>
+					))}
+				</div>
+				<LanguageTags langArr={languages} />
 			</div>
+
 			{/* <div>{translators}</div> */}
-			<div>{languages}</div>
-			<div>{mediaType}</div>
-			<button onClick={(e) => handleAdd(e)}>+</button>
+			<div className='absolute bottom-0 right-0 flex justify-center gap-2 pr-2 pb-2'>
+				<AddBookBtn id={id} />
+				<a
+					title='download book'
+					rel='noreferrer'
+					target='_blank'
+					href={BOOK_URL + id}
+				>
+					<svg
+						xmlns='http://www.w3.org/2000/svg'
+						fill='none'
+						viewBox='0 0 24 24'
+						strokeWidth={1.5}
+						className='h-4 w-4 stroke-emerald-600'
+					>
+						<path
+							strokeLinecap='round'
+							strokeLinejoin='round'
+							d='M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3'
+						/>
+					</svg>
+				</a>
+
+				{/* <div>{mediaType}</div> */}
+			</div>
 		</div>
 	)
 }

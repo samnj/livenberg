@@ -9,7 +9,6 @@ import { SessionProvider } from 'next-auth/react'
 import { BooksProvider } from '../context/Context'
 import { useState, useEffect } from 'react'
 import '../styles/globals.css'
-// import { Toaster } from 'react-hot-toast'
 
 const App = ({ Component, pageProps }) => {
 	const [queryClient] = useState(() => new QueryClient())
@@ -21,7 +20,6 @@ const App = ({ Component, pageProps }) => {
 					<BooksProvider>
 						<Layout>
 							<Component {...pageProps} />
-							{/* <Toaster /> */}
 						</Layout>
 					</BooksProvider>
 				</Hydrate>

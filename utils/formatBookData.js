@@ -1,6 +1,5 @@
 import { dataTypes } from '../constants/constants'
 import audiobookCover from '../public/audiobookCover.png'
-const languageName = new Intl.DisplayNames(['en'], { type: 'language' })
 
 export const formatData = (book) => {
 	const id = book.id
@@ -18,9 +17,8 @@ export const formatData = (book) => {
 
 	const mediaType = dataTypes[book.media_type]
 	const languages = book.languages
-		.map((lang) => languageName.of(lang))
-		.join(', ')
-	const coverUrl = setCover(book.formats['image/jpeg'])
+
+	const cover = setCover(book.formats['image/jpeg'])
 
 	const formats = book.formats
 
@@ -31,14 +29,14 @@ export const formatData = (book) => {
 		title,
 		mediaType,
 		languages,
-		coverUrl,
+		cover,
 		formats,
 	}
 }
 
-const setCover = (url) => {
-	if (url) {
-		return url.includes('small') ? url.replace('small', 'medium') : url
+const setCover = (link) => {
+	if (link) {
+		return link.includes('small') ? link.replace('small', 'medium') : link
 	}
 	return audiobookCover
 }

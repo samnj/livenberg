@@ -7,6 +7,7 @@ import {
 } from '@tanstack/react-query'
 import { formatData } from '../utils/formatBookData'
 import { API_URL } from '../constants/constants'
+import { toast } from 'react-hot-toast'
 
 const fetchBooks = async ({ queryKey, pageParam = 0, signal }) => {
 	const url = pageParam || API_URL + queryKey[1]
@@ -56,16 +57,14 @@ export const useFetchUserBooks = (isSession) => {
 		['userBooksIds'],
 		async () => {
 			const res = await axios.get('/api/userbooks')
-			return res.data
+			const ids = res?.data.map((obj) => obj.book_id)
+			return ids
 		},
 
 		{ refetchOnWindowFocus: false, enabled: isSession }
 	)
 
-	const ids =
-		bookIds.data !== undefined
-			? bookIds.data.map((obj) => obj.book_id).join(',')
-			: null
+	const ids = bookIds.data !== undefined ? bookIds.data.join(',') : null
 	const query = `books?ids=${ids}`
 
 	const isEnabled = ids !== null && isSession ? true : false
@@ -95,6 +94,7 @@ export const useAddBook = () => {
 			onSuccess: () => {
 				queryClient.invalidateQueries(['userBooksIds'])
 				queryClient.invalidateQueries(['userBooks'])
+				toast.success('book added to library')
 			},
 		}
 	)
