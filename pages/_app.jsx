@@ -1,13 +1,14 @@
-import Layout from '../components/Layout'
 import {
+	Hydrate,
 	QueryClient,
 	QueryClientProvider,
-	Hydrate,
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { SessionProvider } from 'next-auth/react'
+import { useState } from 'react'
+
+import Layout from '../components/Layout'
 import { BooksProvider } from '../context/Context'
-import { useState, useEffect } from 'react'
 import '../styles/globals.css'
 
 const App = ({ Component, pageProps }) => {

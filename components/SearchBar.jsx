@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from 'react'
 import { useIsFetching } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import { useFetchBooks } from '../utils/query'
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
+
+import { useFetchBooks } from '../utils/query'
 
 const SearchBar = () => {
 	const [searchStr, setSearchStr] = useState('')

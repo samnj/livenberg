@@ -1,5 +1,5 @@
-import { useSession, signIn, signOut } from 'next-auth/react'
 import { Menu, Transition } from '@headlessui/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 const LoginBtn = () => {
 	const { data: session, status } = useSession()

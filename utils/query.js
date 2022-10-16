@@ -1,16 +1,19 @@
-import axios from 'axios'
 import {
 	useInfiniteQuery,
-	useQuery,
 	useMutation,
+	useQuery,
 	useQueryClient,
 } from '@tanstack/react-query'
-import { formatData } from '../utils/formatBookData'
-import { API_URL } from '../constants/constants'
+import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
+import { API_URL } from '../constants/constants'
+import { formatData } from '../utils/formatBookData'
+
 const fetchBooks = async ({ queryKey, pageParam = 0, signal }) => {
-	const url = pageParam || API_URL + queryKey[1]
+	const originalQuery = queryKey[1]
+	const query = formatQuery(queryKey[1])
+	const url = pageParam || API_URL + query
 	const res = await axios.get(url, { signal })
 	const results = res.data.results
 	if (results.length === 0) {
@@ -21,6 +24,7 @@ const fetchBooks = async ({ queryKey, pageParam = 0, signal }) => {
 		count: res.data.count,
 		books: formatedResults,
 		next: res.data.next,
+		originalQuery,
 	}
 }
 
@@ -29,7 +33,7 @@ const formatQuery = (query) => {
 }
 
 export const useFetchBooks = ({ query, isEnabled }) => {
-	const books = useInfiniteQuery(['books', formatQuery(query)], fetchBooks, {
+	const books = useInfiniteQuery(['books', query], fetchBooks, {
 		getNextPageParam: (lastPage) => lastPage.next ?? undefined,
 		keepPreviousData: true,
 		staleTime: Infinity,
@@ -51,6 +55,8 @@ const fetchUserBooks = async (query, { pageParam = 0 }) => {
 		next: res.data.next,
 	}
 }
+
+// USER	HOOKS
 
 export const useFetchUserBooks = (isSession) => {
 	const bookIds = useQuery(

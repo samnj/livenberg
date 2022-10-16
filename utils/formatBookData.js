@@ -3,24 +3,28 @@ import audiobookCover from '../public/audiobookCover.png'
 
 export const formatData = (book) => {
 	const id = book.id
-	const authors = []
-	book.authors.forEach((author) => {
-		authors.push(author.name)
-	})
+
+	// Some authors have a weird 'graf' word in them
+	const authors = book.authors.map((author) =>
+		author.name.replace(', graf', '')
+	)
+
+	const translators = book.translators.map((translator) => translator.name)
 
 	const title = book.title
-	// const translators = []
-	// book.translators.forEach((translator) => translators.push(translator.name))
-	const translators = book.translators
-		.map((translator) => translator.name)
-		.join('; ')
 
 	const mediaType = dataTypes[book.media_type]
-	const languages = book.languages
+
+	const languageName = new Intl.DisplayNames(['en'], { type: 'language' })
+	const languages = book.languages.map((lang) =>
+		languageName.of(lang).toLowerCase()
+	)
 
 	const cover = setCover(book.formats['image/jpeg'])
-
 	const formats = book.formats
+	const subjects = book.subjects
+	const downloadCount = book.download_count
+	const copyright = book.copyright
 
 	return {
 		id,
@@ -31,6 +35,9 @@ export const formatData = (book) => {
 		languages,
 		cover,
 		formats,
+		subjects,
+		downloadCount,
+		copyright,
 	}
 }
 

@@ -2,5 +2,8 @@
 	"useTabs": true,
 	"semi": false,
 	"singleQuote": true,
-	"jsxSingleQuote": true
+	"jsxSingleQuote": true,
+	"importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+	"importOrderSeparation": true,
+	"importOrderSortSpecifiers": true
 }

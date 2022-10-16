@@ -1,6 +1,7 @@
+import { useRouter } from 'next/router'
+
 import Navbar from './Navbar'
 import SearchBar from './SearchBar'
-import { useRouter } from 'next/router'
 
 const Header = () => {
 	const router = useRouter()

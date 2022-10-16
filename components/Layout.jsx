@@ -1,6 +1,7 @@
-import Header from './Header'
-import { Toaster } from 'react-hot-toast'
 import Head from 'next/head'
+import { Toaster } from 'react-hot-toast'
+
+import Header from './Header'
 
 const Layout = ({ children }) => {
 	return (

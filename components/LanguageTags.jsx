@@ -1,28 +1,27 @@
-const languageName = new Intl.DisplayNames(['en'], { type: 'language' })
-
 const langColors = {
-	en: 'bg-red-400',
-	fr: 'bg-blue-400',
-	it: 'bg-green-400',
-	es: 'bg-orange-400',
-	de: 'bg-yellow-400',
+	english: 'bg-red-400',
+	french: 'bg-blue-400',
+	italian: 'bg-green-400',
+	spanish: 'bg-orange-400',
+	german: 'bg-yellow-400',
+	other: 'bg-violet-400',
 }
 
 const LanguageTags = ({ langArr }) => {
 	return (
-		<div>
+		<div className='space-x-1'>
 			{langArr.map((lang) => (
 				<span
 					key={lang}
-					className={`w-min rounded px-[2px] py-px text-xs drop-shadow-sm
+					className={`w-min rounded-lg px-2 py-px text-xs lowercase drop-shadow-sm
 	          ${
 							langColors.hasOwnProperty(lang)
 								? langColors[lang]
-								: 'bg-violet-400'
+								: langColors['other']
 						}
 	        `}
 				>
-					{languageName.of(lang)}
+					{lang}
 				</span>
 			))}
 		</div>

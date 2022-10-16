@@ -1,6 +1,7 @@
-import LoginBtn from './LoginBtn'
-import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
+
+import LoginBtn from './LoginBtn'
 
 const Navbar = () => {
 	const { data: session, status } = useSession()

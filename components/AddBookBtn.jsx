@@ -1,7 +1,8 @@
-import { useSession } from 'next-auth/react'
-import { useAddBook } from '../utils/query'
 import { useQueryClient } from '@tanstack/react-query'
+import { useSession } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
+
+import { useAddBook } from '../utils/query'
 
 const AddBookBtn = ({ id }) => {
 	const session = useSession()
@@ -38,7 +39,7 @@ const AddBookBtn = ({ id }) => {
 					xmlns='http://www.w3.org/2000/svg'
 					fill='none'
 					viewBox='0 0 24 24'
-					strokeWidth={1.5}
+					strokeWidth={2}
 					className='h-4 w-4 stroke-red-400'
 				>
 					<path
