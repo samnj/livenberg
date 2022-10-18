@@ -10,8 +10,9 @@ const AddBookBtn = ({ id }) => {
 	const queryClient = useQueryClient()
 
 	const isSession = session.status === 'authenticated'
-	const isAdded =
-		isSession && queryClient.getQueryData(['userBooksIds']).includes(id)
+	// const isAdded =
+	// 	isSession && queryClient.getQueryData(['userBooksIds']).includes(id)
+	const isAdded = false
 
 	const handleClick = (e) => {
 		e.preventDefault()
