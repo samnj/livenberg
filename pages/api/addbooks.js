@@ -1,11 +1,24 @@
-// import Database from 'better-sqlite3'
+import prisma from '../../lib/prismadb'
 
-const addbooks = (req, res) => {
-	// const db = new Database('./tempdb')
-	// const stmt = db.prepare('INSERT INTO Books (book_id) VALUES (?)')
-	// stmt.run(req.body.id)
-	// db.close()
-	// res.status(200).json({ id: req.body.id })
+const addbooks = async (req, res) => {
+	try {
+		await prisma.user.update({
+			where: {
+				email: req.body.userEmail,
+			},
+			data: {
+				books: {
+					create: {
+						bookId: req.body.bookId,
+					},
+				},
+			},
+		})
+
+		res.status(200).json({ msg: `Succesfully added book ${req.body.bookId}` })
+	} catch (err) {
+		res.status(500).json({ error: 'Failed to add book' })
+	}
 }
 
 export default addbooks

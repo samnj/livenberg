@@ -70,7 +70,6 @@ const Book = ({ book }) => {
 				<BookDetails isOpen={isOpen} setIsOpen={setIsOpen} book={book} />
 				<AddBookBtn id={id} />
 				<DownloadBtn book_url={BOOK_URL} id={id} />
-				{/* <button onClick={() => console.log(book)}>log book</button> */}
 			</div>
 		</div>
 	)

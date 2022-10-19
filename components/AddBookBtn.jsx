@@ -26,7 +26,7 @@ const AddBookBtn = ({ id }) => {
 			console.log('remove book')
 		}
 
-		mutation.mutate({ id })
+		mutation.mutate({ userEmail: session.data.user.email, bookId: id })
 	}
 
 	return (

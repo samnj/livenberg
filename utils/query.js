@@ -93,8 +93,8 @@ export const useAddBook = () => {
 	const queryClient = useQueryClient()
 
 	return useMutation(
-		(bookId) => {
-			return axios.post('/api/addbooks', bookId)
+		(data) => {
+			return axios.post('/api/addbooks', data)
 		},
 		{
 			onSuccess: () => {
