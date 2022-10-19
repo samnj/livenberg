@@ -59,24 +59,26 @@ const fetchUserBooks = async (query, { pageParam = 0 }) => {
 // USER	HOOKS
 
 export const useFetchUserBooks = (isSession) => {
-	const bookIds = useQuery(
-		['userBooksIds'],
+	const savedBooks = useQuery(
+		['savedBooks'],
 		async () => {
-			const res = await axios.get('/api/userbooks')
-			const ids = res?.data.map((obj) => obj.book_id)
-			return ids
+			return await axios.get('/api/userbooks')
 		},
 
 		{ refetchOnWindowFocus: false, enabled: isSession }
 	)
 
-	const ids = bookIds.data !== undefined ? bookIds.data.join(',') : null
+	const ids =
+		savedBooks.data !== undefined
+			? savedBooks.data.data.map((book) => book.bookId).join(',')
+			: null
+
 	const query = `books?ids=${ids}`
 
-	const isEnabled = ids !== null && isSession ? true : false
+	const isEnabled = ids !== null && isSession
 
 	const books = useInfiniteQuery(
-		['userBooks'],
+		['fetchedUserBooks'],
 		(queryFnCtx) => fetchUserBooks(query, queryFnCtx),
 		{
 			getNextPageParam: (lastPage) => lastPage.next ?? undefined,
@@ -98,8 +100,8 @@ export const useAddBook = () => {
 		},
 		{
 			onSuccess: () => {
-				queryClient.invalidateQueries(['userBooksIds'])
-				queryClient.invalidateQueries(['userBooks'])
+				queryClient.invalidateQueries(['savedBooks'])
+				queryClient.invalidateQueries(['fetchedUserBooks'])
 				toast.success('book added to library')
 			},
 		}

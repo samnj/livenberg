@@ -6,8 +6,6 @@ const Home = () => {
 	const session = useSession()
 	useFetchUserBooks(session.status === 'authenticated')
 
-	console.log(session)
-
 	return (
 		<div className='relative mb-10 flex w-full flex-1 items-center justify-center bg-zinc-100 pb-4'>
 			<p className='absolute top-[10%] w-full text-center text-sm font-normal not-italic'>
