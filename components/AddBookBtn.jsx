@@ -2,11 +2,12 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
 
-import { useAddBook } from '../utils/query'
+import { useAddBook, useDeleteBook } from '../utils/query'
 
 const AddBookBtn = ({ id }) => {
 	const session = useSession()
-	const mutation = useAddBook()
+	const addMutation = useAddBook()
+	const deleteMutation = useDeleteBook()
 	const queryClient = useQueryClient()
 
 	const isSession = session.status === 'authenticated'
@@ -24,10 +25,10 @@ const AddBookBtn = ({ id }) => {
 		}
 
 		if (isAdded) {
-			console.log('remove book')
+			deleteMutation.mutate({ bookId: id })
+			return
 		}
-
-		mutation.mutate({ userEmail: session.data.user.email, bookId: id })
+		addMutation.mutate({ bookId: id })
 	}
 
 	return (

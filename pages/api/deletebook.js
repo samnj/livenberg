@@ -3,7 +3,7 @@ import { unstable_getServerSession } from 'next-auth'
 import prisma from '../../lib/prismadb'
 import { authOptions } from '../api/auth/[...nextauth]'
 
-const getUserBooks = async (req, res) => {
+const deleteBook = async (req, res) => {
 	const session = await unstable_getServerSession(req, res, authOptions)
 
 	if (!session) {
@@ -12,18 +12,17 @@ const getUserBooks = async (req, res) => {
 	}
 
 	try {
-		const getBooks = await prisma.user.findUnique({
+		await prisma.book.deleteMany({
 			where: {
-				email: session.user.email,
-			},
-			include: {
-				books: true,
+				bookId: req.body.bookId,
+				ownerEmail: session.user.email,
 			},
 		})
-		res.status(200).send(getBooks.books)
+		res.status(200).json({ msg: `deleted book ${req.body.bookId}` })
 	} catch (error) {
-		res.status(500).json({ error: 'Failed to retrieve user books' })
+		console.log(error)
+		res.status(500).json({ error: 'Failed to remove book' })
 	}
 }
 
-export default getUserBooks
+export default deleteBook

@@ -1,14 +1,14 @@
-import { createContext, useContext, useState } from 'react'
+// import { createContext, useContext, useState } from 'react'
 
-const BooksContext = createContext()
+// const BooksContext = createContext()
 
-export const BooksProvider = (props) => {
-	const [searchQuery, setSearchQuery] = useState('')
-	return (
-		<BooksContext.Provider value={{ searchQuery, setSearchQuery }}>
-			{props.children}
-		</BooksContext.Provider>
-	)
-}
+// export const BooksProvider = ({ children }) => {
+// 	const [searchQuery, setSearchQuery] = useState('')
+// 	return (
+// 		<BooksContext.Provider value={{ searchQuery, setSearchQuery }}>
+// 			{children}
+// 		</BooksContext.Provider>
+// 	)
+// }
 
-export const useBooksContext = () => useContext(BooksContext)
+// export const useBooksContext = () => useContext(BooksContext)

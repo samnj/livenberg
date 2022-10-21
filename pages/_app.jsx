@@ -18,11 +18,11 @@ const App = ({ Component, pageProps }) => {
 		<SessionProvider session={pageProps.session}>
 			<QueryClientProvider client={queryClient}>
 				<Hydrate state={pageProps.dehydratedState}>
-					<BooksProvider>
-						<Layout>
-							<Component {...pageProps} />
-						</Layout>
-					</BooksProvider>
+					{/* <BooksProvider> */}
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
+					{/* </BooksProvider> */}
 				</Hydrate>
 				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>

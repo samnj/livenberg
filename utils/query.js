@@ -46,6 +46,11 @@ export const useFetchBooks = ({ query, isEnabled }) => {
 
 const fetchUserBooks = async (query, { pageParam = 0 }) => {
 	const url = pageParam || API_URL + query
+
+	if (query === 'books?ids=') {
+		return { count: 0, books: [], next: null }
+	}
+
 	const res = await axios.get(url)
 	const results = res.data.results
 	const formatedResults = results.map((result) => formatData(result))
@@ -65,17 +70,18 @@ export const useFetchUserBooks = (isSession) => {
 			return await axios.get('/api/userbooks')
 		},
 
-		{ refetchOnWindowFocus: false, enabled: isSession }
+		{ refetchOnWindowFocus: true }
+		// { refetchOnWindowFocus: false, enabled: isSession }
 	)
 
 	const ids =
-		savedBooks.data !== undefined
+		savedBooks.data !== undefined && savedBooks.data.data.length > 0
 			? savedBooks.data.data.map((book) => book.bookId).join(',')
 			: null
 
 	const query = `books?ids=${ids}`
 
-	const isEnabled = ids !== null && isSession
+	// const isEnabled = ids !== null && isSession
 
 	const books = useInfiniteQuery(
 		['fetchedUserBooks'],
@@ -83,8 +89,8 @@ export const useFetchUserBooks = (isSession) => {
 		{
 			getNextPageParam: (lastPage) => lastPage.next ?? undefined,
 			keepPreviousData: true,
-			refetchOnWindowsFocus: false,
-			enabled: isEnabled,
+			refetchOnWindowsFocus: true,
+			// enabled: isEnabled,
 		}
 	)
 
@@ -96,7 +102,7 @@ export const useAddBook = () => {
 
 	return useMutation(
 		(data) => {
-			return axios.post('/api/addbooks', data)
+			return axios.patch('/api/addbooks', data)
 		},
 		{
 			onSuccess: () => {
@@ -106,4 +112,27 @@ export const useAddBook = () => {
 			},
 		}
 	)
+}
+
+export const useDeleteBook = () => {
+	const queryClient = useQueryClient()
+
+	return useMutation(
+		(data) => {
+			return axios.delete('/api/deletebook', { data })
+		},
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries(['savedBooks'])
+				queryClient.invalidateQueries(['fetchedUserBooks'])
+				toast.success('book deleted from library')
+			},
+		}
+	)
+}
+
+export const useCountBooks = () => {
+	return useQuery(['booksCount'], async () => {
+		return await axios.get('/api/countuserbooks')
+	})
 }

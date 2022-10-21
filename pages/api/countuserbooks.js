@@ -3,7 +3,7 @@ import { unstable_getServerSession } from 'next-auth'
 import prisma from '../../lib/prismadb'
 import { authOptions } from '../api/auth/[...nextauth]'
 
-const getUserBooks = async (req, res) => {
+const countUserBooks = async (req, res) => {
 	const session = await unstable_getServerSession(req, res, authOptions)
 
 	if (!session) {
@@ -12,18 +12,22 @@ const getUserBooks = async (req, res) => {
 	}
 
 	try {
-		const getBooks = await prisma.user.findUnique({
+		const count = await prisma.user.findMany({
 			where: {
 				email: session.user.email,
 			},
 			include: {
-				books: true,
+				_count: {
+					select: {
+						books: true,
+					},
+				},
 			},
 		})
-		res.status(200).send(getBooks.books)
+		res.status(200).send(count[0]._count.books)
 	} catch (error) {
-		res.status(500).json({ error: 'Failed to retrieve user books' })
+		res.status(500).json({ error: 'Failed to count user books' })
 	}
 }
 
-export default getUserBooks
+export default countUserBooks

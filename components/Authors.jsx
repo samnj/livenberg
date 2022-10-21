@@ -35,7 +35,11 @@ const Authors = ({ authors, isDetails, isTranslators }) => {
 	}
 
 	return (
-		<div className={`flex items-center gap-1 ${!isDetails && 'line-clamp-1'}`}>
+		<div
+			className={`flex flex-wrap items-center gap-1 ${
+				!isDetails && 'line-clamp-1'
+			}`}
+		>
 			<span className='font-semibold'>{isDetails && createText(authors)}</span>
 
 			{authors.map((author, index) => (
