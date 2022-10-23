@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 
 import BookList from '../../components/BookList'
 import InvalidQuery from '../../components/InvalidQuery'
-import { useFetchBooks } from '../../utils/query'
-import { useFetchUserBooks } from '../../utils/query'
+import { useFetchBooks } from '../../utils/queryTools'
+import { useFetchUserBooks } from '../../utils/queryTools'
 
 const Books = () => {
 	const session = useSession()

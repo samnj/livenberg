@@ -8,7 +8,6 @@ import { SessionProvider } from 'next-auth/react'
 import { useState } from 'react'
 
 import Layout from '../components/Layout'
-import { BooksProvider } from '../context/Context'
 import '../styles/globals.css'
 
 const App = ({ Component, pageProps }) => {
@@ -18,13 +17,11 @@ const App = ({ Component, pageProps }) => {
 		<SessionProvider session={pageProps.session}>
 			<QueryClientProvider client={queryClient}>
 				<Hydrate state={pageProps.dehydratedState}>
-					{/* <BooksProvider> */}
 					<Layout>
 						<Component {...pageProps} />
 					</Layout>
-					{/* </BooksProvider> */}
 				</Hydrate>
-				<ReactQueryDevtools initialIsOpen={false} />
+				{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 			</QueryClientProvider>
 		</SessionProvider>
 	)

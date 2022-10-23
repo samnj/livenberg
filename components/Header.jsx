@@ -7,8 +7,8 @@ const Header = () => {
 	const router = useRouter()
 
 	return (
-		<div className='sticky top-0 z-20 w-full bg-zinc-100/70 backdrop-blur-lg'>
-			<div className='mx-auto w-full max-w-md px-4'>
+		<div className='sticky flex justify-center top-0 z-20 w-full bg-zinc-100/70 backdrop-blur-lg'>
+			<div className='px-4 grow max-w-md'>
 				<Navbar />
 				{router.pathname !== '/library' && <SearchBar />}
 			</div>

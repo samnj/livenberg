@@ -8,7 +8,7 @@ import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
 import { API_URL } from '../constants/constants'
-import { formatData } from '../utils/formatBookData'
+import { formatData } from './formatBookData'
 
 const fetchBooks = async ({ queryKey, pageParam = 0, signal }) => {
 	const originalQuery = queryKey[1]
@@ -44,6 +44,8 @@ export const useFetchBooks = ({ query, isEnabled }) => {
 	return books
 }
 
+// USER	HOOKS
+
 const fetchUserBooks = async (query, { pageParam = 0 }) => {
 	const url = pageParam || API_URL + query
 
@@ -61,9 +63,7 @@ const fetchUserBooks = async (query, { pageParam = 0 }) => {
 	}
 }
 
-// USER	HOOKS
-
-export const useFetchUserBooks = (isSession) => {
+export const useFetchUserBooks = () => {
 	const savedBooks = useQuery(
 		['savedBooks'],
 		async () => {
@@ -71,26 +71,22 @@ export const useFetchUserBooks = (isSession) => {
 		},
 
 		{ refetchOnWindowFocus: true }
-		// { refetchOnWindowFocus: false, enabled: isSession }
 	)
 
 	const ids =
 		savedBooks.data !== undefined && savedBooks.data.data.length > 0
 			? savedBooks.data.data.map((book) => book.bookId).join(',')
-			: null
+			: ''
 
 	const query = `books?ids=${ids}`
 
-	// const isEnabled = ids !== null && isSession
-
 	const books = useInfiniteQuery(
-		['fetchedUserBooks'],
+		['fetchedUserBooks', query],
 		(queryFnCtx) => fetchUserBooks(query, queryFnCtx),
 		{
 			getNextPageParam: (lastPage) => lastPage.next ?? undefined,
 			keepPreviousData: true,
 			refetchOnWindowsFocus: true,
-			// enabled: isEnabled,
 		}
 	)
 
@@ -107,7 +103,7 @@ export const useAddBook = () => {
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries(['savedBooks'])
-				queryClient.invalidateQueries(['fetchedUserBooks'])
+				queryClient.invalidateQueries(['booksCount'])
 				toast.success('book added to library')
 			},
 		}
@@ -124,7 +120,7 @@ export const useDeleteBook = () => {
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries(['savedBooks'])
-				queryClient.invalidateQueries(['fetchedUserBooks'])
+				queryClient.invalidateQueries(['booksCount'])
 				toast.success('book deleted from library')
 			},
 		}

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { Fragment } from 'react'
 import { useEffect, useState } from 'react'
 
-import { useFetchBooks } from '../utils/query'
+import { useFetchBooks } from '../utils/queryTools'
 
 const Authors = ({ authors, isDetails, isTranslators }) => {
 	const [query, setQuery] = useState({ query: '', isEnabled: false })

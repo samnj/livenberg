@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { useFetchBooks } from '../utils/query'
+import { useFetchBooks } from '../utils/queryTools'
 
 const SearchBar = () => {
 	const [searchStr, setSearchStr] = useState('')
@@ -21,6 +21,7 @@ const SearchBar = () => {
 				query: { search: query.query },
 			})
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data])
 
 	useEffect(() => {

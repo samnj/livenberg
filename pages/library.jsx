@@ -1,10 +1,11 @@
-import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useState } from 'react'
 
 import BookList from '../components/BookList'
-import { useFetchUserBooks } from '../utils/query'
+import FilterBar from '../components/FilterBar'
+import { useFetchUserBooks } from '../utils/queryTools'
+import { useCountBooks } from '../utils/queryTools'
 
 const Library = () => {
 	const router = useRouter()
@@ -15,6 +16,9 @@ const Library = () => {
 		},
 	})
 
+	const [filter, setFilter] = useState('')
+	const [isDoneFetching, setIsDoneFetching] = useState(false)
+
 	const {
 		data: books,
 		isLoading,
@@ -24,6 +28,8 @@ const Library = () => {
 		fetchNextPage,
 	} = useFetchUserBooks(session.status === 'authenticated')
 
+	const { data: countQuery } = useCountBooks()
+
 	if (!books) return <></>
 
 	if (isLoading && isFetching)
@@ -32,13 +38,33 @@ const Library = () => {
 		)
 
 	if (books) {
-		console.log(books.pages[0].count)
-		return <BookList data={books} />
-	}
+		if (hasNextPage && !isFetchingNextPage) {
+			fetchNextPage()
+		}
 
-	if (hasNextPage && !isFetchingNextPage) {
-		console.count('fetching next page...')
-		fetchNextPage()
+		if (!hasNextPage && books.pages[0].count > 0 && !isDoneFetching) {
+			setIsDoneFetching(true)
+		}
+
+		const booklist = isDoneFetching
+			? books.pages.flatMap((page) => page.books)
+			: books
+
+		return (
+			<div className='max-w-md'>
+				<FilterBar
+					setFilter={setFilter}
+					isDisabled={isDoneFetching ? false : true}
+				/>
+				<BookList
+					data={booklist}
+					countQuery={countQuery}
+					isDoneFetching={isDoneFetching}
+					filter={filter}
+					setFilter={setFilter}
+				/>
+			</div>
+		)
 	}
 }
 

@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
 
-import { useAddBook, useDeleteBook } from '../utils/query'
+import { useAddBook, useDeleteBook } from '../utils/queryTools'
 
 const AddBookBtn = ({ id }) => {
 	const session = useSession()

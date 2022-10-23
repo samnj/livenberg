@@ -1,6 +1,6 @@
 const BookTypeLegend = () => {
 	return (
-		<div className='my-2 flex gap-2 self-start text-xs drop-shadow-md'>
+		<div className='mb-2 flex gap-2 self-start text-xs drop-shadow-md'>
 			<div className='flex gap-1 items-center'>
 				<span className={`bg-red-400 h-2 w-2 rounded`}></span>
 				<div className='mb-1'>ebook</div>

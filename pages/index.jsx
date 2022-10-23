@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react'
 
-import { useFetchUserBooks } from '../utils/query'
+import { useFetchUserBooks } from '../utils/queryTools'
 
 const Home = () => {
 	const session = useSession()
