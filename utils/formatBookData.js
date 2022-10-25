@@ -1,5 +1,5 @@
 import { dataTypes } from '../constants/constants'
-import audiobookCover from '../public/audiobookCover.png'
+import no_cover from '../public/no_cover.png'
 
 export const formatData = (book) => {
 	const id = book.id
@@ -45,5 +45,5 @@ const setCover = (link) => {
 	if (link) {
 		return link.includes('small') ? link.replace('small', 'medium') : link
 	}
-	return audiobookCover
+	return no_cover
 }

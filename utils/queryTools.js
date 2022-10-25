@@ -86,7 +86,8 @@ export const useFetchUserBooks = () => {
 		{
 			getNextPageParam: (lastPage) => lastPage.next ?? undefined,
 			keepPreviousData: true,
-			refetchOnWindowsFocus: true,
+			refetchOnMount: false,
+			refetchOnWindowsFocus: false,
 		}
 	)
 

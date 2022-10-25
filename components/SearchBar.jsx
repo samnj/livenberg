@@ -64,11 +64,11 @@ const SearchBar = () => {
 	return (
 		<div className='pt-2'>
 			<form
-				className='flex items-center justify-center py-4'
+				className='flex items-center justify-center py-4 lg:py-8'
 				onSubmit={handleSubmit}
 			>
 				<label htmlFor='searchBar' />
-				<div className='relative w-full'>
+				<div className='relative max-w-md w-full'>
 					<input
 						type='search'
 						id='searchBar'
@@ -78,7 +78,7 @@ const SearchBar = () => {
 						autoComplete='off'
 						onChange={handleChange}
 						value={searchStr}
-						className={`w-full rounded-md border-2 shadow-sm ring-0 placeholder:text-sm focus:ring-0
+						className={`w-full rounded-md border-2 shadow-sm ring-0 placeholder:text-sm md:placeholder:text-base focus:ring-0
 						 		${
 									isValid
 										? 'border-emerald-500 placeholder-neutral-400 focus:border-emerald-500'
@@ -87,13 +87,13 @@ const SearchBar = () => {
 					/>
 					<button
 						type='submit'
-						className={`absolute top-0 right-0 h-full w-8
+						className={`absolute top-0 md:right-2 right-0 h-full w-8
 							${isValid ? 'stroke-emerald-500' : 'stroke-red-600'}
 						`}
 					>
 						{useIsFetching(['books']) ? (
 							<svg
-								className='mx-auto h-5 w-5 animate-spin text-emerald-400'
+								className='mx-auto md:h-6 md:w-6 h-5 w-5 animate-spin text-emerald-400'
 								xmlns='http://www.w3.org/2000/svg'
 								fill='none'
 								viewBox='0 0 24 24'
@@ -115,7 +115,7 @@ const SearchBar = () => {
 						) : (
 							<svg
 								aria-hidden='true'
-								className='mx-auto h-5 w-5'
+								className='mx-auto md:h-6 md:w-6 h-5 w-5'
 								fill='none'
 								viewBox='0 0 24 24'
 								xmlns='http://www.w3.org/2000/svg'

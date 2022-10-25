@@ -5,7 +5,7 @@ const FilterBtn = ({ filter, setFilter }) => {
 	}
 
 	return filter ? (
-		<div className='inline-flex mt-2 py-1 px-2 gap-1 rounded-md items-center justify-between bg-zinc-50 border drop-shadow-sm'>
+		<div className='inline-flex mt-3 -mb-2 py-1 px-2 gap-1 rounded-md items-center justify-between bg-zinc-50 border drop-shadow-sm'>
 			<p className='-translate-y-[1px]'>{filter}</p>
 			<button onClick={handleClick}>
 				<svg

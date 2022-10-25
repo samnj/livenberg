@@ -9,11 +9,11 @@ const langColors = {
 
 const LanguageTags = ({ langArr }) => {
 	return (
-		<div className='space-x-1'>
+		<div className='space-x-1 select-none'>
 			{langArr.map((lang) => (
 				<span
 					key={lang}
-					className={`w-min rounded-lg px-2 py-px text-xs lowercase drop-shadow-sm
+					className={`w-min rounded-lg px-2 py-px text-xs text-black lowercase drop-shadow-sm
 	          ${
 							langColors.hasOwnProperty(lang)
 								? langColors[lang]

@@ -3,16 +3,18 @@ import Link from 'next/link'
 const InvalidQuery = () => {
 	return (
 		<div className='text-center'>
-			<h1 className='mt-20 text-2xl font-bold uppercase'>Invalid query</h1>
+			<h1 className='mt-20 text-2xl md:text-3xl font-bold uppercase'>
+				Invalid query
+			</h1>
 			<Link href='/'>
-				<a className='mt-10 inline-flex items-center gap-1 rounded-md bg-indigo-400 px-2 py-1 text-neutral-200'>
+				<a className='mt-10 md:text-lg inline-flex items-center gap-1 md:gap-2 rounded-md bg-indigo-400 md:px-4 md:py-3 px-3 py-2 text-neutral-200'>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						fill='none'
 						viewBox='0 0 24 24'
 						strokeWidth={1.5}
 						stroke='currentColor'
-						className='inline h-5 w-5'
+						className='inline h-5 w-5 md:h-7 md:w-7'
 					>
 						<path
 							strokeLinecap='round'

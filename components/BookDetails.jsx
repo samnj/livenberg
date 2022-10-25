@@ -25,8 +25,8 @@ const BookDetails = ({ isOpen, setIsOpen, book }) => {
 			onClose={() => setIsOpen(false)}
 			className='fixed inset-0 z-50 flex items-center justify-center bg-zinc-50/60 backdrop-blur-sm'
 		>
-			<Dialog.Panel className='flex overflow-y-scroll max-h-5/6 w-4/5 flex-col items-start rounded-sm border border-zinc-200  bg-zinc-100 py-6 px-2'>
-				<div className='mb-4 flex h-36 w-28 self-center'>
+			<Dialog.Panel className='flex max-w-md items-center overflow-y-auto max-h-5/6 w-4/5 flex-col rounded-sm border border-zinc-200  bg-zinc-100 py-6 px-2'>
+				<div className='mb-4 flex h-36 w-28 self-center md:h-44 md:w-36'>
 					<Image
 						src={cover}
 						width={200}
@@ -35,11 +35,14 @@ const BookDetails = ({ isOpen, setIsOpen, book }) => {
 						className='rounded-sm drop-shadow-md'
 					/>
 				</div>
-				<div title={title} className={'mb-1 text-lg font-bold'}>
+				<div
+					title={title}
+					className='mb-1 md:mt-2 text-lg md:text-xl self-center text-center font-bold max-w-sm w-full'
+				>
 					{title}
 				</div>
 
-				<div className='space-y-1'>
+				<div className='flex flex-col md:mt-4 md:text-xl gap-1 w-full max-w-sm'>
 					<Authors authors={authors} isDetails={true} isTranslators={false} />
 					{translators.length > 0 && (
 						<Authors
@@ -64,14 +67,14 @@ const BookDetails = ({ isOpen, setIsOpen, book }) => {
 					</div>
 				</div>
 
-				<div className='flex mt-4 gap-2'>
+				<div className='flex mt-4 md:mt-6 md:gap-3 gap-2 max-w-sm w-full'>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						fill='none'
 						viewBox='0 0 24 24'
 						strokeWidth={1.7}
 						stroke='currentColor'
-						className='w-4 h-4 cursor-pointer'
+						className='w-4 md:w-5 md:h-5 h-4 cursor-pointer'
 						onClick={() => setIsOpen(false)}
 					>
 						<path

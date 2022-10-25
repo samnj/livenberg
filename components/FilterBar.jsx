@@ -17,7 +17,7 @@ const FilterBar = ({ setFilter, isDisabled }) => {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className='ml-4 flex grow items-center justify-start'
+			className='ml-4 flex grow items-center justify-start lg:justify-center'
 		>
 			<label htmlFor='filterBar' />
 			<div className='flex relative'>
@@ -29,7 +29,7 @@ const FilterBar = ({ setFilter, isDisabled }) => {
 					autoComplete='off'
 					onChange={handleChange}
 					value={searchStr}
-					className='h-8 disabled:bg-slate-300 text-sm pr-6 rounded-md border-1 shadow-sm ring-0 placeholder:text-sm focus:ring-0 border-emerald-500 placeholder-neutral-400 focus:border-emerald-500'
+					className='h-8 disabled:bg-slate-300 text-sm pr-8 md:w-72 md:h-10 md:text-base rounded-md border-2 shadow-sm ring-0 placeholder:text-sm focus:ring-0 border-emerald-500 placeholder-neutral-400 focus:border-emerald-500'
 				/>
 				<button type='submit' className='h-full absolute top-0 right-2'>
 					<svg
@@ -38,7 +38,7 @@ const FilterBar = ({ setFilter, isDisabled }) => {
 						viewBox='0 0 24 24'
 						strokeWidth={1.7}
 						stroke='currentColor'
-						className='w-4 h-4 stroke-emerald-500'
+						className='w-4 h-4 md:w-5 md:h-5 stroke-emerald-500'
 					>
 						<path
 							strokeLinecap='round'

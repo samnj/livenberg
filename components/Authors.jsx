@@ -47,9 +47,9 @@ const Authors = ({ authors, isDetails, isTranslators }) => {
 					<p
 						title={author}
 						onClick={handleClick}
-						className={`inline cursor-pointer text-sm ${
-							!isTranslators && 'italic underline decoration-from-font'
-						}`}
+						className={`inline cursor-pointer underline lg:text-base text-sm ${
+							isDetails && 'lg:text-xl'
+						} ${!isTranslators && 'italic decoration-from-font'}`}
 					>
 						{author}
 					</p>

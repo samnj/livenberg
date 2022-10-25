@@ -80,7 +80,7 @@ const LoginBtn = () => {
 			{session && (
 				<button
 					onClick={() => signOut()}
-					className='border border-zinc-100 py-1 transition-all hover:scale-105 hover:text-emerald-500'
+					className=' py-1 transition-all hover:scale-105 hover:text-emerald-500'
 				>
 					logout
 				</button>

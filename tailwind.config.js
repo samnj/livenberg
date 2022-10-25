@@ -10,6 +10,7 @@ module.exports = {
 				garamond: ['EB Garamond', 'sans-serif'],
 				montserrat: ['Montserrat', 'sans-serif'],
 				lato: ['Lato', 'sans-serif'],
+				firaMono: ['Fira Mono', 'monospace'],
 			},
 		},
 	},

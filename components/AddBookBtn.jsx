@@ -43,7 +43,7 @@ const AddBookBtn = ({ id }) => {
 					fill='none'
 					viewBox='0 0 24 24'
 					strokeWidth={2}
-					className='h-4 w-4 stroke-red-400'
+					className='h-4 w-4 lg:w-5 lg:h-5 stroke-red-400'
 				>
 					<path
 						strokeLinecap='round'
@@ -57,7 +57,7 @@ const AddBookBtn = ({ id }) => {
 					fill='none'
 					viewBox='0 0 24 24'
 					strokeWidth={1.5}
-					className='h-4 w-4 stroke-emerald-600'
+					className='h-4 w-4 lg:w-5 lg:h-5 stroke-emerald-600'
 				>
 					<path
 						strokeLinecap='round'
