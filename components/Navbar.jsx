@@ -11,7 +11,7 @@ const Navbar = () => {
 			<div className='font-semibold text-emerald-700 lg:text-3xl text-lg md:text-2xl'>
 				<Link href='/'>Livenberg</Link>
 			</div>
-			<div className='flex items-center gap-4 md:gap-8 text-sm md:text-lg lg:gap-12 lg:text-xl font-medium text-emerald-600'>
+			<div className='flex items-center gap-4 md:gap-8 text-sm md:text-lg lg:gap-12 lg:text-lg font-medium text-emerald-600'>
 				<button
 					className={
 						session ? 'hover:scale-105 hover:text-emerald-500' : 'hidden'
