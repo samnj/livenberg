@@ -18,27 +18,6 @@ export const authOptions = {
 	],
 	secret: process.env.NEXTAUTH_SECRET,
 	adapter: PrismaAdapter(prisma),
-	debug: true,
-	events: {
-		async signIn(message) {
-			/* on successful sign in */
-		},
-		async signOut(message) {
-			/* on signout */
-		},
-		async createUser(message) {
-			/* user created */
-		},
-		async updateUser(message) {
-			/* user updated - e.g. their email was verified */
-		},
-		async linkAccount(message) {
-			/* account (e.g. Twitter) linked to a user */
-		},
-		async session(message) {
-			/* session is active */
-		},
-	},
 }
 
 export default NextAuth(authOptions)

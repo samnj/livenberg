@@ -43,12 +43,18 @@ const BookDetails = ({ isOpen, setIsOpen, book }) => {
 				</div>
 
 				<div className='flex flex-col md:mt-4 md:text-xl gap-1 w-full max-w-sm'>
-					<Authors authors={authors} isDetails={true} isTranslators={false} />
+					<Authors
+						authors={authors}
+						isDetails={true}
+						isTranslators={false}
+						setIsOpen={setIsOpen}
+					/>
 					{translators.length > 0 && (
 						<Authors
 							authors={translators}
 							isDetails={true}
 							isTranslators={true}
+							setIsOpen={setIsOpen}
 						/>
 					)}
 					<div>

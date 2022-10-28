@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { useFetchBooks } from '../utils/queryTools'
 
-const Authors = ({ authors, isDetails, isTranslators }) => {
+const Authors = ({ authors, isDetails, isTranslators, setIsOpen }) => {
 	const [query, setQuery] = useState({ query: '', isEnabled: false })
 	const { data } = useFetchBooks(query)
 	const router = useRouter()
@@ -23,16 +23,13 @@ const Authors = ({ authors, isDetails, isTranslators }) => {
 
 	useEffect(() => {
 		if (data) {
+			setIsOpen(false)
 			router.push({
 				pathname: '/results/books',
 				query: { search: query.query },
 			})
 		}
 	}, [data])
-
-	const handleClick = (e) => {
-		setQuery({ query: e.target.textContent, isEnabled: true })
-	}
 
 	return (
 		<div
@@ -46,7 +43,9 @@ const Authors = ({ authors, isDetails, isTranslators }) => {
 				<Fragment key={author}>
 					<p
 						title={author}
-						onClick={handleClick}
+						onClick={(e) => {
+							setQuery({ query: e.target.textContent, isEnabled: true })
+						}}
 						className={`inline cursor-pointer underline lg:text-base text-sm ${
 							isDetails && 'lg:text-xl'
 						} ${!isTranslators && 'italic decoration-from-font'}`}
