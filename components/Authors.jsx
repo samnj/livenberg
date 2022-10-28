@@ -46,8 +46,8 @@ const Authors = ({ authors, isDetails, isTranslators, setIsOpen }) => {
 						onClick={(e) => {
 							setQuery({ query: e.target.textContent, isEnabled: true })
 						}}
-						className={`inline cursor-pointer underline lg:text-base text-sm ${
-							isDetails && 'lg:text-xl'
+						className={`inline cursor-pointer mr-1 underline lg:text-base text-sm ${
+							isDetails && 'lg:text-xl mr-0'
 						} ${!isTranslators && 'italic decoration-from-font'}`}
 					>
 						{author}
