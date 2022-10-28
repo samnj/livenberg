@@ -8,7 +8,7 @@ const BookList = ({ data, countQuery, isDoneFetching, filter, setFilter }) => {
 	const { count, originalQuery } = isDoneFetching ? '' : data.pages[0]
 
 	return (
-		<div className='mb-4 max-w-md md:max-w-2xl lg:max-w-7xl lg:gap-x-16 lg:gap-y-10 md:gap-x-6 md:gap-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 flex grow flex-col items-center justify-start gap-x-2 gap-y-4 px-4'>
+		<div className='mb-4 max-w-md md:max-w-2xl lg:max-w-7xl flex grow flex-col items-center justify-start'>
 			<BookListHeader
 				results={count}
 				query={originalQuery}
@@ -17,19 +17,45 @@ const BookList = ({ data, countQuery, isDoneFetching, filter, setFilter }) => {
 				setFilter={setFilter}
 			/>
 
-			{isDoneFetching
-				? filterBooks(data, filter).map((book) => (
-						<Book key={book.id} book={book} />
-				  ))
-				: data.pages.map((page) => (
-						<Fragment key={page.next}>
-							{page.books.map((book) => (
-								<Book key={book.id} book={book} />
-							))}
-						</Fragment>
-				  ))}
+			<div className='lg:gap-x-16 lg:gap-y-10 md:gap-x-6 md:gap-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 flex grow flex-col  justify-start gap-x-2 gap-y-4 px-4'>
+				{isDoneFetching
+					? filterBooks(data, filter).map((book) => (
+							<Book key={book.id} book={book} />
+					  ))
+					: data.pages.map((page) => (
+							<Fragment key={page.next}>
+								{page.books.map((book) => (
+									<Book key={book.id} book={book} />
+								))}
+							</Fragment>
+					  ))}
+			</div>
 		</div>
 	)
 }
+// 	return (
+// 		<div className='mb-4 max-w-md md:max-w-2xl lg:max-w-7xl lg:gap-x-16 lg:gap-y-10 md:gap-x-6 md:gap-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 flex grow flex-col items-center justify-start gap-x-2 gap-y-4 px-4'>
+// 			<BookListHeader
+// 				results={count}
+// 				query={originalQuery}
+// 				countQuery={countQuery}
+// 				filter={filter}
+// 				setFilter={setFilter}
+// 			/>
+
+// 			{isDoneFetching
+// 				? filterBooks(data, filter).map((book) => (
+// 						<Book key={book.id} book={book} />
+// 				  ))
+// 				: data.pages.map((page) => (
+// 						<Fragment key={page.next}>
+// 							{page.books.map((book) => (
+// 								<Book key={book.id} book={book} />
+// 							))}
+// 						</Fragment>
+// 				  ))}
+// 		</div>
+// 	)
+// }
 
 export default BookList

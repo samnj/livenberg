@@ -47,7 +47,7 @@ const Books = () => {
 
 	if (data)
 		return (
-			<div>
+			<>
 				<BookList data={data} />
 				<div
 					className='text-center h-4 mb-4 lg:text-2xl lg:h-10 text-lg animate-pulse text-neutral-800 font-semibold'
@@ -55,7 +55,7 @@ const Books = () => {
 				>
 					{isFetchingNextPage ? 'Loading...' : ''}
 				</div>
-			</div>
+			</>
 		)
 
 	if (Object.keys(router.query).length !== 0 && !validateQuery(router.query))

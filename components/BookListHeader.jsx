@@ -6,7 +6,7 @@ const BookListHeader = ({ results, query, countQuery, filter, setFilter }) => {
 	const router = useRouter()
 
 	return (
-		<div className='self-start md:col-span-2 lg:col-span-3 md:text-sm text-xs'>
+		<div className='self-start ml-4 mb-4 md:text-sm text-xs'>
 			{router.pathname !== '/library' ? (
 				`${results} results for "${query}"`
 			) : (
