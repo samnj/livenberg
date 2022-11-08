@@ -3,7 +3,10 @@ import Link from 'next/link'
 const InvalidQuery = () => {
 	return (
 		<div className='text-center'>
-			<h1 className='mt-20 text-2xl md:text-3xl font-bold uppercase'>
+			<h1
+				id='invalidQueryText'
+				className='mt-20 text-2xl md:text-3xl font-bold uppercase'
+			>
 				Invalid query
 			</h1>
 			<Link href='/'>
