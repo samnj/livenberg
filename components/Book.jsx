@@ -44,6 +44,7 @@ const Book = ({ book }) => {
 							authors={authors}
 							isDetails={false}
 							isTranslators={false}
+							setIsOpen={setIsOpen}
 						/>
 					</div>
 					<LanguageTags langArr={languages} />
