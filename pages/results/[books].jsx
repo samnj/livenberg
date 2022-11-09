@@ -23,7 +23,7 @@ const Books = () => {
 
 	const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useFetchBooks({
-			query: router.query.search,
+			query: router.query.search?.toLowerCase(),
 			isEnabled: validateQuery(router.query),
 		})
 
