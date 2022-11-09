@@ -13,6 +13,7 @@ const Navbar = () => {
 			</div>
 			<div className='flex items-center gap-4 md:gap-8 text-sm md:text-lg lg:gap-12 lg:text-lg font-medium text-emerald-600'>
 				<button
+					id='library'
 					className={
 						session ? 'hover:scale-105 hover:text-emerald-500' : 'hidden'
 					}
