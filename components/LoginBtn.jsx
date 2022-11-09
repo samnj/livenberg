@@ -81,6 +81,7 @@ const LoginBtn = () => {
 				<button
 					onClick={() => signOut()}
 					className=' py-1 transition-all hover:scale-105 hover:text-emerald-500'
+					id='logoutBtn'
 				>
 					logout
 				</button>
