@@ -50,11 +50,13 @@ const Books = () => {
 			<>
 				<BookList data={data} />
 				<div
-					id='loadingNextPage'
-					className='text-center h-4 mb-4 lg:text-2xl lg:h-10 text-lg animate-pulse text-neutral-800 font-semibold'
+					id='loadingNextPageIndicator'
+					className={`text-center h-4 mb-4 lg:text-2xl lg:h-10 text-lg animate-pulse text-neutral-800 font-semibold ${
+						isFetchingNextPage ? 'visible' : 'invisible'
+					}`}
 					ref={ref}
 				>
-					{isFetchingNextPage ? 'Loading...' : ''}
+					Loading...
 				</div>
 			</>
 		)
