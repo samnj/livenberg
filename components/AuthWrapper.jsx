@@ -9,8 +9,6 @@ const AuthWrapper = ({ children }) => {
 	const { status } = useSession()
 	const router = useRouter()
 
-	console.log(router.pathname)
-
 	if (status === 'loading') return null
 
 	return (
