@@ -10,7 +10,7 @@ import { useFetchUserBooks } from '../../utils/queryTools'
 
 const Books = () => {
 	const session = useSession()
-	useFetchUserBooks(session.status === 'authenticated')
+	useFetchUserBooks()
 
 	const router = useRouter()
 	const { ref, inView } = useInView({
