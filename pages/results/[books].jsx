@@ -1,4 +1,3 @@
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
@@ -6,12 +5,8 @@ import { useInView } from 'react-intersection-observer'
 import BookList from '../../components/BookList'
 import InvalidQuery from '../../components/InvalidQuery'
 import { useFetchBooks } from '../../utils/queryTools'
-import { useFetchUserBooks } from '../../utils/queryTools'
 
 const Books = () => {
-	const session = useSession()
-	useFetchUserBooks(session.status === 'authenticated')
-
 	const router = useRouter()
 	const { ref, inView } = useInView({
 		rootMargin: '600px',

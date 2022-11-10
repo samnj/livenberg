@@ -1,16 +1,12 @@
-import { useSession } from 'next-auth/react'
-
-import { useFetchUserBooks } from '../utils/queryTools'
-
 const Home = () => {
-	const session = useSession()
-	useFetchUserBooks(session.status === 'authenticated')
-
 	return (
-		<div className='relative mb-10 flex w-full flex-1 items-center justify-center bg-zinc-100 pb-4'>
-			<p className='absolute top-[10%] w-full text-center lg:text-lg md:text-base text-sm font-normal not-italic'>
+		<div
+			id='index-header'
+			className='relative mb-10 flex w-full flex-1 items-center justify-center bg-zinc-100 pb-4'
+		>
+			<h1 className='absolute top-[10%] w-full text-center lg:text-lg md:text-base text-sm font-normal not-italic'>
 				A Project Gutenberg search engine and library
-			</p>
+			</h1>
 			<div className=' flex w-full flex-col lg:py-20 md:py-16 items-center justify-center bg-zinc-50 py-12 font-montserrat md:text-2xl lg:text-3xl text-xl font-semibold'>
 				<blockquote className='relative z-20 w-[17rem] lg:w-[26rem] md:w-[22rem] italic'>
 					<p>

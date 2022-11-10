@@ -13,8 +13,9 @@ const AddBookBtn = ({ id }) => {
 	const isSession = session.status === 'authenticated'
 	const isAdded =
 		isSession &&
-		queryClient.getQueryData(['savedBooks']).data.filter((b) => b.bookId === id)
-			.length > 0
+		queryClient
+			.getQueryData(['savedBooks'])
+			?.data.filter((b) => b.bookId === id).length > 0
 
 	const handleClick = (e) => {
 		e.preventDefault()

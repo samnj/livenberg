@@ -1,5 +1,3 @@
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import BookList from '../components/BookList'
@@ -8,14 +6,6 @@ import { useFetchUserBooks } from '../utils/queryTools'
 import { useCountBooks } from '../utils/queryTools'
 
 const Library = () => {
-	const router = useRouter()
-	const session = useSession({
-		required: true,
-		onUnauthenticated() {
-			router.push('/')
-		},
-	})
-
 	const [filter, setFilter] = useState('')
 	const [isDoneFetching, setIsDoneFetching] = useState(false)
 
@@ -26,7 +16,7 @@ const Library = () => {
 		isFetchingNextPage,
 		isFetching,
 		fetchNextPage,
-	} = useFetchUserBooks(session.status === 'authenticated')
+	} = useFetchUserBooks()
 
 	const { data: countQuery } = useCountBooks()
 
